@@ -12,12 +12,10 @@ use Fx\HyperfHttpAuth\GuardHelpers;
 use Fx\HyperfHttpAuth\Exception\UnauthorizedHttpException;
 use Hyperf\Contract\SessionInterface;
 use Hyperf\Di\Annotation\Inject;
-use Hyperf\HttpMessage\Cookie\CookieJar;
 use Hyperf\HttpMessage\Cookie\CookieJarInterface;
 use Hyperf\HttpServer\Contract\RequestInterface;
-use Hyperf\Utils\Context;
 use Hyperf\Utils\Str;
-use Psr\EventDispatcher\EventDispatcherInterface;
+use Fangx\Cookie\Contracts\QueueingFactory;
 
 /**
  * Class SessionGuard
@@ -60,10 +58,9 @@ class SessionGuard implements StatefulGuard
     protected $session;
 
     /**
-     * The session used by the guard.
+     *  The cookie creator service.
      *
-     * @var \Hyperf\HttpMessage\Cookie\CookieJarInterface
-     * @var CookieJar
+     * @var \Fangx\Cookie\Contracts\QueueingFactory
      */
     protected $cookie;
 
@@ -99,6 +96,7 @@ class SessionGuard implements StatefulGuard
     {
         $this->provider = $provider;
         $this->session = make(SessionInterface::class);
+        $this->cookie = make(QueueingFactory::class);
     }
 
     /**

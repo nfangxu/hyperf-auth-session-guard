@@ -1,5 +1,3 @@
-# component-creater
+## SessionGuard
 
-```
-composer create-project hyperf/component-creater
-```
+## @See [https://github.com/nfangxu/hyperf-http-auth](https://github.com/nfangxu/hyperf-http-auth)
